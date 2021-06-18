@@ -23,20 +23,6 @@ namespace LifeInsuranceApp.Controllers
 
         }
 
-        [HttpPost]
-        public ActionResult Index(string button, UserModel user)
-        {
-            // This will clear whatever form items have been populated        
-            if (button == "Clear")  //I can see code is executed here, I need to clear all UI fields starts from there.
-            {
-                //here, I need to clear all Input text fields, text, listbox, dropdownlist, etc.   
-                ModelState.Clear();
-                return View(); //this will return the original UI razor view,
-
-            }
-            return View();
-        }
-
         //Get the occupation list for dropdown
         public List<SelectListItem> GetOccupationList()
         {
