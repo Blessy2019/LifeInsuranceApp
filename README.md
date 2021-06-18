@@ -54,4 +54,4 @@ Heavy Manual   1.75
 
 1) Copy the github.link and open in Visual Studio 
 2) Mention a local path on your system where you want to clone the Git Repository.
-3) Once done , run the application. 
+3) Once done , build the solution and then run the application. 
