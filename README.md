@@ -26,7 +26,7 @@ And then finally click the "Calculate Premium" and which you would display the p
 5) In View page, for Date of Birth set the default date as "today" , which is done to perform calculation of age as you select the date.
 6) Added validations for entire form. Since are the fields are mandatory.
 7) On selecting a value from OccupationList dropdown , a jQuery AJAX function is called which returns the Rating Factor based on the Occupation and Occupation Rating mapping.
-8) Also, added the Unit test cases in "UnitTest" Project.
+8) Also, added the Unit test cases in "LifeInsurance.Tests" Project.
 9) On Calculate Premium Button Click - the total premium is calculated and displayed based on the below formula :
 
 Death Premium = (Death Cover amount * Occupation Rating Factor * Age) /1000 * 12
