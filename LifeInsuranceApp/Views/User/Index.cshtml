@@ -1,0 +1,304 @@
+﻿@model LifeInsuranceApp.Models.UserModel
+@{
+    ViewBag.Title = "Life Insurance";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/Site.css" rel="stylesheet" />
+
+    <style>
+        body {
+            /*background-color:gainsboro;*/
+            background-image: url('/Content/themes/base/images/finance1.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            float: none;
+            height: 435px;
+            width: 100%;
+        }
+
+        .container {
+            height: 550px;
+            width: 900px;
+            /*background-color: ghostwhite;*/
+            background-color: #EBF2D3;
+        }
+
+        h1 {
+            height: 60px;
+            color: #fff;
+            background-color: #9CAF60;
+            text-align: left;
+            margin-top: 15px;
+            padding-top: 10px;
+            padding-left: 10px;
+        }
+
+        .mainform {
+            float: left;
+            margin-left: 1px;
+        }
+
+        .custom-form-label {
+            float: left;
+            margin-left: 0px;
+        }
+
+        .btncolor {
+            color: #fff;
+            background-color: #9CAF60;
+            display: inline-block;
+            margin-bottom: 0;
+            font-weight: normal;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            touch-action: manipulation;
+            cursor: pointer;
+            background-image: none;
+            border: 1px solid transparent;
+            padding: 6px 12px;
+            font-size: 16px;
+            line-height: 1.42857143;
+            border-radius: 4px;
+            user-select: none;
+        }
+
+            .btncolor:hover {
+                background-color: #9CAF60;
+            }
+
+        input[type="radio"] {
+            margin-left: 30px;
+            cursor: pointer;
+        }
+
+            input[type="radio"] label {
+                margin-right: 100px;
+            }
+
+        .dollarsign:after {
+            position: absolute;
+            left: 20px;
+            top: 8px;
+            content: '$'
+        }
+
+        .divTotal {
+            width: 300px;
+            height: 80px;
+        }
+
+            .divTotal p {
+                font-size: 20px;
+                padding-left: 20px;
+                font-weight: bold;
+            }
+    </style>
+</head>
+
+<body>
+    <div class="main_container">
+        <h1> Life Insurance Quote</h1>
+        <div class="mainform col-lg-offset-4 col-lg-12">
+            @using (Html.BeginForm("Index", "User", FormMethod.Post, new { }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "custom-form-label control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", id = "fname" } })
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "custom-form-label control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", id = "lname" } })
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.RadioButtonFor(model => model.Gender, "Male", new { htmlAttributes = new { id = "male" } })  Male
+                            @Html.RadioButtonFor(model => model.Gender, "Female", new { htmlAttributes = new { id = "female" } }) Female
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control datepicker", @readonly = "readonly", id = "dob" } })
+                            @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control", id = "age", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(x => Model.Occupation, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(x => Model.OccupationList, new SelectList(Model.OccupationList, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "occupation" })
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DeathSumInsured, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                        <div class="col-md-10">
+                            <div class="dollarsign">
+                                @Html.EditorFor(model => model.DeathSumInsured, new { htmlAttributes = new { @class = "form-control", id = "amt" } })
+                                @Html.ValidationMessageFor(model => model.DeathSumInsured, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3"><button type="submit" id="validate" class="btncolor">Calculate Premium</button></div>
+                        <div class="col-md-3"><button type="reset" id="resetBtn" class="btncolor">Reset</button></div>
+
+                    </div>
+                </div>
+            }
+        </div>
+        <div id="TotalPremium" class="divTotal"></div>
+    </div>
+
+
+    @section scripts{
+
+        <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+        <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+        @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/bundles/jqueryui")
+        @Styles.Render("~/Content/cssjqueryUi")
+
+
+        <script type="text/javascript">
+
+            var currentdate = new Date();
+            var month = currentdate.getMonth() + 1
+            var day = currentdate.getDate()
+            var year = currentdate.getFullYear()
+            var today = (month + "/" + day + "/" + year)
+
+            var dateformat = new Date(today);
+            $('.datepicker').datepicker({
+                dateFormat: "mm/dd/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-80:+0",
+                maxDate: today
+
+            })
+                .datepicker('setDate', dateformat)
+                .on('change', function () {
+                    var dob = $(this).datepicker('getDate');
+                    var age = getAge(dob);
+                    $('#age').val(age);
+                });
+
+
+            function getAge(dateVal) {
+
+                var dob = new Date(dateVal);
+                var d = new Date();
+                var age = d.getFullYear() - dob.getFullYear();
+                return age;
+            }
+
+            $("#resetBtn").on('click', function () {
+                $(".datepicker").datepicker('setDate', dateformat);
+                $('#TotalPremium').empty();
+            })
+
+            $(document).ready(function () {
+                $('form').submit(function (e) {
+                    e.preventDefault();
+
+                    if ($(this).valid()) {
+                        $('#TotalPremium').empty();
+                        var occupation = $('#occupation').val();
+
+                        $.ajax({
+                            type: "POST",
+                            url: "/User/OccupationRating",
+                            data: { 'occupation_name': occupation },
+                            success: function (data) {
+                                CalculateRatingFactor(data);
+                            },
+                            error: function () {
+                                alert("Error while calculating data");
+                            }
+                        })
+                    }
+                });
+
+                //$('form').reset(function (e) {
+                //    e.preventDefault();
+
+                //}
+
+                //);
+            });
+
+
+            function CalculateRatingFactor(data) {
+                $.ajax({
+                    type: "POST",
+                    url: "/User/RatingFactor",
+                    data: { 'rating': data },
+                    success: function (data) {
+                        CalculatePremium(data);
+                    },
+                    error: function () {
+                        alert("Error while calculating data");
+                    }
+                })
+            }
+
+            function CalculatePremium(data) {
+                var age = $('#age').val();
+                var death_amt = $('#amt').val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/User/CalculatePremium",
+                    data: { 'age': age, 'death_amt': death_amt, 'rating_factor': data },
+                    success: function (data) {
+                        $("#TotalPremium").append('<p>' + data + "</p>");
+                    },
+                    error: function () {
+                        alert("Error while calculating data");
+                    }
+                })
+            }
+
+
+        </script>
+    }
+</body>
+</html>
+
