@@ -54,4 +54,4 @@ Heavy Manual   1.75
 
 1) Copy the github.link and open in Visual Studio 
 2) Mention a local path on your system where you want to clone the Git Repository.
-3) Once done , build the solution and once cross-check do you have the bin\roslyn folder insdie project and then run the application. 
+3) Once done , build the solution and then run the application. 
